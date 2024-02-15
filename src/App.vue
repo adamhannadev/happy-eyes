@@ -18,8 +18,7 @@ const eyeStates = ref([
 const selectedEyeStates = ref([])
 
 function save(e) {
-  const status = {"treatments": selectedTreatments.value, "eyeStates": "bon"}
-  // const status = {bill: "named Jeremy", arron: "named william"}
+  const status = {"treatments": selectedTreatments.value, "eyeStates": selectedEyeStates.value}
  localStorage.setItem(today, JSON.stringify(status));
 };
 
@@ -28,7 +27,6 @@ const storedData = localStorage.getItem(today);
 
 <template>
   {{ JSON.stringify(selectedTreatments) }}
-  {{ JSON.parse(storedData).treatments }}
   <div class="flex mt-5">
     <div class="flex flex-1"></div>
     <Panel class="flex-grow-1 justify-content-center shadow-1">
