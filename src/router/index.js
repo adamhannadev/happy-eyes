@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import CheckInForm from '../views/CheckInForm.vue'
+import StatsCalendar from '../views/StatsCalendar.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -9,6 +10,11 @@ const router = createRouter({
       name: 'home',
       component: CheckInForm
     },
+    {
+      path: '/stats',
+      name: 'stats-calendar',
+      component: StatsCalendar
+    }
     // {
     //   path: '/about',
     //   name: 'about',

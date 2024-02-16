@@ -15,6 +15,7 @@ import Panel from 'primevue/panel';
 import Checkbox from 'primevue/checkbox';
 import Button from 'primevue/button';
 import Image from 'primevue/image';
+import Card from 'primevue/card';
 
 
 const app = createApp(App);
@@ -26,5 +27,6 @@ app.component('Panel', Panel);
 app.component('Checkbox', Checkbox);
 app.component('Button', Button);
 app.component('Image', Image);
+app.component('Card', Card)
 
 app.mount('#app');
