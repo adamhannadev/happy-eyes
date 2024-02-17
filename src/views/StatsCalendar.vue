@@ -1,6 +1,4 @@
 <script setup>
-import { ref } from 'vue'
-const days = ref([])
 
 const items = { ...localStorage }
 const report = []
@@ -46,7 +44,7 @@ console.log(report)
 </template> 
 
 <style scoped>
-.pi {
+.pi-circle {
     font-size: 1rem;
 }
 </style>
