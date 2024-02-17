@@ -9,7 +9,6 @@ for (let [key, value] of Object.entries(items)) {
     console.log(`key=${key} value=${value}`)
     report.push({ date: key, values: JSON.parse(value) })
 }
-
 </script>
 
 <template>
@@ -32,13 +31,9 @@ for (let [key, value] of Object.entries(items)) {
                             <template #title></template>
                             <template #content class="text-center">
                             {{ day.date }}
+                            {{ day.values.treatments[0].key }}
                             <div class="flex justify-content-center mt-3">
-                                <i class="pi pi-circle "></i>
-                            <i class="pi pi-circle "></i>
-                            <i class="pi pi-circle "></i>
-                            <i class="pi pi-circle "></i>
-                            <i class="pi pi-circle "></i>
-                            <i class="pi pi-circle "></i>
+                            <i v-for="treatment in day.values.treatments" class="pi pi-circle" :style="{ 'color': 'var(--' + treatment.colour + ')'}"></i>
                             </div>
                             
                             </template>
@@ -47,7 +42,7 @@ for (let [key, value] of Object.entries(items)) {
                 </div>
             </div>
 
-
+{{  report }}
         </Panel>
         <div class="flex flex-1"></div>
     </div>

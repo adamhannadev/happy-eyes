@@ -33,7 +33,9 @@ const storedData = localStorage.getItem(today);
     <Panel class="flex-grow-1 justify-content-center shadow-1">
       <template #header class="bg-orange-50">
         <div class="flex gap-3 flex-grow-1 justify-content-center align-items-center">
-          <i class="pi pi-chart-line"></i>
+          <RouterLink :to="{name: 'stats-calendar'}">
+            <i class="pi pi-chart-line"></i>
+          </RouterLink>
           <div class="border-primary border-3 border-round">
             <span class="font-bold p-2 text-2xl text-primary-800">{{ today }}</span>
           </div>
@@ -45,7 +47,8 @@ const storedData = localStorage.getItem(today);
       <div v-for="treatment of treatments" :key="treatment.key" class="flex flex-column gap-4">
         <div class="flex align-items-left mb-4 p-2 border-round"
           :style="{ 'background-color': 'var(--' + treatment.colour + ')' }">
-          <Checkbox v-model="selectedTreatments" :inputId="treatment.key" name="treatment" :value="{name: treatment.name, colour: treatment.colour}" />
+          <Checkbox v-model="selectedTreatments" :inputId="treatment.key" name="treatment"
+            :value="{ name: treatment.name, colour: treatment.colour, key: treatment.key }" />
           <label style="color:white;" class="ml-2 text-xl" :for="treatment.key">{{ treatment.name }}</label>
         </div>
       </div>
@@ -56,7 +59,8 @@ const storedData = localStorage.getItem(today);
       <div v-for="eyeState of eyeStates" :key="eyeState.key" class="flex flex-column gap-4">
         <div class="flex align-items-left mb-4 p-2 border-round"
           :style="{ 'background-color': 'var(--' + eyeState.colour + ')' }">
-          <Checkbox v-model="selectedEyeStates" :inputId="eyeState.key" name="treatment" :value="{name: eyeState.name, colour: eyeState.colour}" />
+          <Checkbox v-model="selectedEyeStates" :inputId="eyeState.key" name="treatment"
+            :value="{ name: eyeState.name, colour: eyeState.colour, key: eyeState.key }" />
           <label style="color:white;" class="ml-2 text-xl" :for="eyeState.key">{{ eyeState.name }}</label>
         </div>
       </div>
@@ -72,11 +76,12 @@ const storedData = localStorage.getItem(today);
 .pi {
   font-size: 2rem;
 }
+
 :deep(.p-panel .p-panel-header) {
-    background-color: var(--orange-100);
-    color: black;
+  background-color: var(--orange-100);
+  color: black;
 }
-:deep(.p-panel .p-panel-content){
-  background-color: var(--orange-50) ;
-}
-</style>
+
+:deep(.p-panel .p-panel-content) {
+  background-color: var(--orange-50);
+}</style>
