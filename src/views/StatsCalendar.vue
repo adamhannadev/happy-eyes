@@ -4,14 +4,15 @@ const days = ref([])
 
 const items = { ...localStorage }
 const report = []
-
 for (let [key, value] of Object.entries(items)) {
-    console.log(`key=${key} value=${value}`)
+    // console.log(`key=${key} value=${value}`)
     report.push({ date: key, values: JSON.parse(value) })
 }
+console.log(report)
 </script>
 
 <template>
+    <!-- {{  report }} -->
     <div class="flex mt-5">
         <div class="flex flex-1"></div>
         <Panel class="flex-grow-1 justify-content-center shadow-1">
@@ -31,18 +32,14 @@ for (let [key, value] of Object.entries(items)) {
                             <template #title></template>
                             <template #content class="text-center">
                             {{ day.date }}
-                            {{ day.values.treatments[0].key }}
                             <div class="flex justify-content-center mt-3">
-                            <i v-for="treatment in day.values.treatments" class="pi pi-circle" :style="{ 'color': 'var(--' + treatment.colour + ')'}"></i>
+                            <i v-for="treatment in day.values" class="pi pi-circle" :class="{'pi-circle-fill': treatment.selected}" :style="{'color': 'var(--' + treatment.colour + ')'}"></i>
                             </div>
-                            
                             </template>
                         </Card>
                     </div>
                 </div>
             </div>
-
-{{  report }}
         </Panel>
         <div class="flex flex-1"></div>
     </div>

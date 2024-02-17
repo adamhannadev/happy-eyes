@@ -2,32 +2,28 @@
 import { ref } from 'vue';
 const today = new Date().toDateString();
 const treatments = ref([
-  { name: "Preservative Free Artificial Tears", key: "1", colour: "green-400" },
-  { name: "AM Warm Compress/Mask", key: "2", colour: "pink-600" },
-  { name: "6 to 8 8oz Glasses of Water", key: "3", colour: "teal-400" },
-  { name: "Ointment or Gel Drops", key: "4", colour: "cyan-600" },
-  { name: "Omega Supplements", key: "5", colour: "yellow-500" },
-  { name: "PM Warm Compress/Mask", key: "6", colour: "purple-900" },
+  { name: "Preservative Free Artificial Tears", key: "1", colour: "green-400", selected: false},
+  { name: "AM Warm Compress/Mask", key: "2", colour: "pink-600", selected: false },
+  { name: "6 to 8 8oz Glasses of Water", key: "3", colour: "teal-400", selected: false },
+  { name: "Ointment or Gel Drops", key: "4", colour: "cyan-600", selected: false },
+  { name: "Omega Supplements", key: "5", colour: "yellow-500", selected: false },
+  { name: "PM Warm Compress/Mask", key: "6", colour: "purple-900", selected: false },
 ]);
-const selectedTreatments = ref([]);
+// const selectedTreatments = ref([]);
 const eyeStates = ref([
   { name: "Gritty", key: "1", colour: "bluegray-500" },
   { name: "Irritated", key: "2", colour: "red-700" },
   { name: "Comfortable", key: "2", colour: "indigo-400" },
 ]);
-const selectedEyeStates = ref([])
+// const selectedEyeStates = ref([])
 
 function save(e) {
-  const status = { "treatments": selectedTreatments.value, "eyeStates": selectedEyeStates.value }
-  console.log(status)
-  localStorage.setItem(today, JSON.stringify(status));
+  localStorage.setItem(today, JSON.stringify(treatments.value));
 };
-
-const storedData = localStorage.getItem(today);
 </script>
 
 <template>
-  {{ JSON.stringify(selectedTreatments) }}
+  <!-- {{ treatments }} -->
   <div class="flex mt-5">
     <div class="flex flex-1"></div>
     <Panel class="flex-grow-1 justify-content-center shadow-1">
@@ -47,8 +43,7 @@ const storedData = localStorage.getItem(today);
       <div v-for="treatment of treatments" :key="treatment.key" class="flex flex-column gap-4">
         <div class="flex align-items-left mb-4 p-2 border-round"
           :style="{ 'background-color': 'var(--' + treatment.colour + ')' }">
-          <Checkbox v-model="selectedTreatments" :inputId="treatment.key" name="treatment"
-            :value="{ name: treatment.name, colour: treatment.colour, key: treatment.key }" />
+          <Checkbox v-model="treatment.selected" :inputId="treatment.key" v-bind:selected="true" :binary="true" value="true" name="treatment" />
           <label style="color:white;" class="ml-2 text-xl" :for="treatment.key">{{ treatment.name }}</label>
         </div>
       </div>
@@ -56,14 +51,14 @@ const storedData = localStorage.getItem(today);
         <span class="font-bold border-primary border-3 border-round mb-4 p-1 text-2xl text-primary-800">Today My Eyes Felt
           Mostly</span>
       </div>
-      <div v-for="eyeState of eyeStates" :key="eyeState.key" class="flex flex-column gap-4">
+      <!-- <div v-for="eyeState of eyeStates" :key="eyeState.key" class="flex flex-column gap-4">
         <div class="flex align-items-left mb-4 p-2 border-round"
           :style="{ 'background-color': 'var(--' + eyeState.colour + ')' }">
           <Checkbox v-model="selectedEyeStates" :inputId="eyeState.key" name="treatment"
             :value="{ name: eyeState.name, colour: eyeState.colour, key: eyeState.key }" />
           <label style="color:white;" class="ml-2 text-xl" :for="eyeState.key">{{ eyeState.name }}</label>
         </div>
-      </div>
+      </div> -->
       <div class="flex justify-content-center">
         <Button label="Submit" @click="save" class="shadow-1 text-xl" />
       </div>
