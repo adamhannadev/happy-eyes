@@ -45,7 +45,7 @@ const storedData = localStorage.getItem(today);
       <div v-for="treatment of treatments" :key="treatment.key" class="flex flex-column gap-4">
         <div class="flex align-items-left mb-4 p-2 border-round"
           :style="{ 'background-color': 'var(--' + treatment.colour + ')' }">
-          <Checkbox v-model="selectedTreatments" :inputId="treatment.key" name="treatment" :value="treatment.name" />
+          <Checkbox v-model="selectedTreatments" :inputId="treatment.key" name="treatment" :value="{name: treatment.name, colour: treatment.colour}" />
           <label style="color:white;" class="ml-2 text-xl" :for="treatment.key">{{ treatment.name }}</label>
         </div>
       </div>
@@ -56,7 +56,7 @@ const storedData = localStorage.getItem(today);
       <div v-for="eyeState of eyeStates" :key="eyeState.key" class="flex flex-column gap-4">
         <div class="flex align-items-left mb-4 p-2 border-round"
           :style="{ 'background-color': 'var(--' + eyeState.colour + ')' }">
-          <Checkbox v-model="selectedEyeStates" :inputId="eyeState.key" name="treatment" :value="eyeState.name" />
+          <Checkbox v-model="selectedEyeStates" :inputId="eyeState.key" name="treatment" :value="{name: eyeState.name, colour: eyeState.colour}" />
           <label style="color:white;" class="ml-2 text-xl" :for="eyeState.key">{{ eyeState.name }}</label>
         </div>
       </div>
