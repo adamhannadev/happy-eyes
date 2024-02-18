@@ -11,14 +11,17 @@ const treatments = ref([
 ]);
 // const selectedTreatments = ref([]);
 const eyeStates = ref([
-  { name: "Gritty", key: "1", colour: "bluegray-500" },
-  { name: "Irritated", key: "2", colour: "red-700" },
-  { name: "Comfortable", key: "2", colour: "indigo-400" },
+  { name: "Gritty", key: "1", colour: "bluegray-500", selected: false },
+  { name: "Irritated", key: "2", colour: "red-700", selected: true },
+  { name: "Comfortable", key: "2", colour: "indigo-400", selected: false },
 ]);
 // const selectedEyeStates = ref([])
 
 function save(e) {
-  localStorage.setItem(today, JSON.stringify(treatments.value));
+  const stringifiedTreatments = JSON.stringify(treatments.value)
+  const stringifiedEyeStates = JSON.stringify(eyeStates.value)
+  const report = {'treatments': treatments.value, 'eyeStates': eyeStates.value}
+  localStorage.setItem(today, JSON.stringify(report));
 };
 </script>
 
@@ -51,14 +54,13 @@ function save(e) {
         <span class="font-bold border-primary border-3 border-round mb-4 p-1 text-2xl text-primary-800">Today My Eyes Felt
           Mostly</span>
       </div>
-      <!-- <div v-for="eyeState of eyeStates" :key="eyeState.key" class="flex flex-column gap-4">
+      <div v-for="eyeState of eyeStates" :key="eyeState.key" class="flex flex-column gap-4">
         <div class="flex align-items-left mb-4 p-2 border-round"
           :style="{ 'background-color': 'var(--' + eyeState.colour + ')' }">
-          <Checkbox v-model="selectedEyeStates" :inputId="eyeState.key" name="treatment"
-            :value="{ name: eyeState.name, colour: eyeState.colour, key: eyeState.key }" />
+          <Checkbox v-model="eyeState.selected" :inputId="eyeState.key" v-bind:selected="true" :binary="true" value="true" name="treatment" />
           <label style="color:white;" class="ml-2 text-xl" :for="eyeState.key">{{ eyeState.name }}</label>
         </div>
-      </div> -->
+      </div>
       <div class="flex justify-content-center">
         <Button label="Submit" @click="save" class="shadow-1 text-xl" />
       </div>

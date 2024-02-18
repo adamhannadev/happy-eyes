@@ -6,11 +6,18 @@ for (let [key, value] of Object.entries(items)) {
     // console.log(`key=${key} value=${value}`)
     report.push({ date: key, values: JSON.parse(value) })
 }
+
+function filterSelectedTrue(arr) {
+  return arr.filter(obj => obj.selected === true);
+}
+
+console.log(filterSelectedTrue(report[0].values.eyeStates));
+
 console.log(report)
 </script>
 
 <template>
-    <!-- {{  report }} -->
+    {{  }}
     <div class="flex mt-5">
         <div class="flex flex-1"></div>
         <Panel class="flex-grow-1 justify-content-center shadow-1">
@@ -26,12 +33,12 @@ console.log(report)
             <div class="grid">
                 <div v-for="day in report">
                     <div class="col">
-                        <Card class="border-3 border-green-500">
-                            <template #title></template>
+                        <Card class="border-3" :class="[filterSelectedTrue(day.values.eyeStates) ? 'border-' + filterSelectedTrue(day.values.eyeStates)[0].colour : '']">
+                            <template #title>{{ day.date }}</template>
                             <template #content class="text-center">
-                            {{ day.date }}
+                            
                             <div class="flex justify-content-center mt-3">
-                            <i v-for="treatment in day.values" class="pi pi-circle" :class="{'pi-circle-fill': treatment.selected}" :style="{'color': 'var(--' + treatment.colour + ')'}"></i>
+                            <i v-for="treatment in day.values.treatments" class="pi pi-circle" :class="{'pi-circle-fill': treatment.selected}" :style="{'color': 'var(--' + treatment.colour + ')'}"></i>
                             </div>
                             </template>
                         </Card>
